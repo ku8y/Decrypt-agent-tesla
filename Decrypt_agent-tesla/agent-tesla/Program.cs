@@ -69,6 +69,48 @@ namespace AgentTeslaFullDecrypt
         }
     }
 
+		public unsafe static string wUK(int lgFaCzXanNo)
+		{
+			if (lgFaCzXanNo < 0)
+				return string.Empty;
+
+			fixed (byte* basePtr = HZcFoBytes)
+			{
+				byte* ptr2 = basePtr;
+
+				ptr2 += (lgFaCzXanNo ^ *(int*)ptr2);
+
+				int len = *(int*)ptr2;
+				int xorKey = *(int*)(ptr2 + 4);
+
+				byte[] array = new byte[len];
+
+				fixed (byte* dst = array)
+				{
+					Buffer.MemoryCopy(ptr2 + 8, dst, len, len);
+				}
+
+				int i = 0;
+				int j = array.Length - 1;
+
+				while (i < j)
+				{
+					array[i] ^= array[j];
+					array[j] ^= (byte)(array[i] ^ xorKey);
+					array[i] ^= array[j];
+					i++;
+					j--;
+				}
+
+				if ((array.Length & 1) != 0)
+				{
+					array[array.Length / 2] ^= (byte)xorKey;
+				}
+
+				return Encoding.UTF8.GetString(array);
+			}
+		}
+
 	public static class j7xqcJiG4H
 	{
 		public static byte[] HZcFoBytes = new byte[]
@@ -8694,48 +8736,7 @@ namespace AgentTeslaFullDecrypt
 		0x01, 0x3A, 0x91, 0x03, 0x00, 0x00, 0xFE, 0x0C, 0x1D, 0x00, 0x20, 0x00,
 		0x00, 0x00, 0x00, 0xFE, 0x01, 0x2C
 		};
-
-		public unsafe static string wUK(int lgFaCzXanNo)
-		{
-			if (lgFaCzXanNo < 0)
-				return string.Empty;
-
-			fixed (byte* basePtr = HZcFoBytes)
-			{
-				byte* ptr2 = basePtr;
-
-				ptr2 += (lgFaCzXanNo ^ *(int*)ptr2);
-
-				int len = *(int*)ptr2;
-				int xorKey = *(int*)(ptr2 + 4);
-
-				byte[] array = new byte[len];
-
-				fixed (byte* dst = array)
-				{
-					Buffer.MemoryCopy(ptr2 + 8, dst, len, len);
-				}
-
-				int i = 0;
-				int j = array.Length - 1;
-
-				while (i < j)
-				{
-					array[i] ^= array[j];
-					array[j] ^= (byte)(array[i] ^ xorKey);
-					array[i] ^= array[j];
-					i++;
-					j--;
-				}
-
-				if ((array.Length & 1) != 0)
-				{
-					array[array.Length / 2] ^= (byte)xorKey;
-				}
-
-				return Encoding.UTF8.GetString(array);
-			}
-		}
 	}
 }
+
 
