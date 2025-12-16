@@ -1,2 +1,58 @@
 # Decrypt-agent-tesla
 This is the code for decrypting the encrypted agent-tesla.
+
+
+## Deobfuscation Script (C#)
+
+본 저장소에는 agent tesla 의  
+**소스 코드에 적용된 난독화를 자동으로 해제하기 위한 C# 스크립트**가 포함되어 있습니다.
+
+해당 스크립트는 실행 파일(.exe)을 대상으로 하지 않으며,  
+**dnSpy를 통해 Export된 C# 소스 코드 전체를 분석 및 패치하는 용도**로 제작되었습니다.
+
+---
+
+## Prerequisites
+
+스크립트 사용을 위해 아래 조건이 필요합니다.
+
+1. Agent Tesla 샘플을 **dnSpy**를 이용해 로드
+2. dnSpy의 **Export 기능**을 사용하여  
+   디컴파일된 **전체 C# 소스 코드 추출**
+3. 추출된 소스 코드가 **로컬 디렉터리에 저장되어 있을 것**
+
+> ⚠️ 실행 파일(.exe) 또는 DLL을 직접 입력하는 방식이 아닙니다.
+
+---
+
+## Usage
+
+스크립트 내부의 아래 변수에  
+**dnSpy로 Export한 소스 코드 디렉터리 경로**를 지정합니다.
+
+```csharp
+예) string sourceDir = @"C:\agent-tesla\aa04758c-4b32-461d-98b6-71debafa0e44";
+```
+
+---
+
+## Additional Notes & Customization
+
+- 본 스크립트는 agent tesla 모든 샘플에 대해 **동일하게 적용되지 않을 수 있습니다**.
+- Agent Tesla는 빌더 버전, 유포 시점, 커스텀 난독화 여부에 따라  
+  문자열 복호화 방식 및 난독화 로직이 서로 다를 수 있습니다.
+
+### Customization Guide
+
+---
+
+- `main()` 함수는 **전체 소스 순회 및 패치 흐름을 담당**하므로  
+  **수정하지 않고 그대로 유지**하는 것을 권장합니다.
+- 대신, 난독화 해제 대상이 되는 **문자열 복호화 함수 / 난독화 함수만**
+  사용자가 직접 분석하여 **수동으로 다시 작성**하면,
+
+다른 Agent Tesla 샘플에 대해서도  
+**동일한 구조의 복호화 및 난독화 해제 스크립트로 그대로 활용**할 수 있습니다.
+
+즉, 본 스크립트는 특정 샘플에 종속된 일회성 코드가 아니라,  
+Agent Tesla 계열 악성코드 분석을 위한 **확장 가능한 코드**입니다.
