@@ -14,7 +14,8 @@ namespace AgentTeslaFullDecrypt
                 RegexOptions.Compiled
             );
 
-            string sourceDir = @"C:\agent-tesla\aa04758c-4b32-461d-98b6-71debafa0e44";
+            string sourceDir = @"C:\agent-tesla\aa04758c-4b32-461d-98b6-71debafa0e44"; //Please enter the path containing the Agent Tesla source code.
+			
 
             Console.WriteLine("[*] AgentTesla full source decrypt started...\n");
 
@@ -8703,7 +8704,6 @@ namespace AgentTeslaFullDecrypt
 			{
 				byte* ptr2 = basePtr;
 
-				// offset 계산
 				ptr2 += (lgFaCzXanNo ^ *(int*)ptr2);
 
 				int len = *(int*)ptr2;
@@ -8738,3 +8738,4 @@ namespace AgentTeslaFullDecrypt
 		}
 	}
 }
+
