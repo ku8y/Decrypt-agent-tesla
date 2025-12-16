@@ -33,6 +33,8 @@
 예) string sourceDir = @"C:\agent-tesla\aa04758c-4b32-461d-98b6-71debafa0e44";
 ```
 
+정상적으로 빌드 후 실행하면 난독화 된 소스코드가 자동으로 패치 됩니다.
+
 ---
 
 ## Additional Notes & Customization
